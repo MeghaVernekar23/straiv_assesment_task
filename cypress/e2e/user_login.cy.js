@@ -1,7 +1,7 @@
-describe('Login Automation on AutomationExercise.com', () => {
+describe('Automating User Login', () => {
   const loginUrl = 'https://www.automationexercise.com/login';
   
-  it('should load the login page and allow user to login', () => {
+  it('Should be able to see the login form', () => {
       cy.visit(loginUrl);
     
       cy.url().should('include', '/login');
