@@ -1,11 +1,14 @@
+const url = 'https://www.automationexercise.com';
+
 describe('User Registration', () => {
-    it('should register a new user', () => {
-        cy.visit('https://www.automationexercise.com/')
+    // Positive Test Case
+    it('should register a new user with proper signup form data', () => {
+        cy.visit(url)
 
         cy.get('a[href="/login"]').click()
 
-        cy.get('input[data-qa="signup-name"]').type('invalidname');
-        cy.get('input[data-qa="signup-email"]').type('invaliduser4@example.com');
+        cy.get('input[data-qa="signup-name"]').type('validname');
+        cy.get('input[data-qa="signup-email"]').type('validname@example.com');
 
         
         cy.get('button[data-qa="signup-button"]').click();
@@ -37,4 +40,24 @@ describe('User Registration', () => {
         cy.get('a[href="/delete_account"]').click()
         cy.get('a[data-qa="continue-button"]').click();
     })
+
+    // Negative Test Case
+    it('should not be allowed to register new user as validation fails', () => {
+        cy.visit(url)
+
+        cy.get('a[href="/login"]').click()
+
+        cy.get('input[data-qa="signup-name"]').type('invalidname');
+        cy.get('input[data-qa="signup-email"]').type('invaliduser4-example.com');
+
+        
+        cy.get('button[data-qa="signup-button"]').click();
+
+        cy.get('input[data-qa="signup-email"]').then(($input) => {
+            expect($input[0].checkValidity()).to.be.false;   
+            expect($input[0].validationMessage).to.eq('Die E-Mail-Adresse muss ein @-Zeichen enthalten. In der Angabe "invaliduser4-example.com" fehlt ein @-Zeichen.');
+        });
+
+    });
+
 })
