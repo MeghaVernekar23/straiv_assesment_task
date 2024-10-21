@@ -32,3 +32,8 @@ Highly recommended:
   ```bash
   npx cypress open
   ```
+
+## Contact
+
+Name: Megha Vernekar
+Email: meghavernekar98@gmail.com
