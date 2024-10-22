@@ -1,14 +1,11 @@
-import { deleteUserAccount, Url } from "../support/userRegHelpers";
+import { deleteUserAccount, Url, navigateToLogin, fillSignupForm } from "../support/userRegHelpers";
 
 describe('User Registration', () => {
     // Positive Test Case
     it('should register a new user with valid signup form data', () => {
-        cy.visit(Url)
+        navigateToLogin();
 
-        cy.get('a[href="/login"]').click()
-        cy.get('input[data-qa="signup-name"]').type('validname');
-        cy.get('input[data-qa="signup-email"]').type('validname@example.com');        
-        cy.get('button[data-qa="signup-button"]').click();
+        fillSignupForm('validname', 'validname@example.com')
 
         cy.get('#id_gender1').check()
         cy.get('input[data-qa="password"]').type('password123')
@@ -33,12 +30,9 @@ describe('User Registration', () => {
     })
 
     it('should register a new user with optional fields not filled', () => {
-        cy.visit(Url)
+        navigateToLogin();
 
-        cy.get('a[href="/login"]').click()
-        cy.get('input[data-qa="signup-name"]').type('validname');
-        cy.get('input[data-qa="signup-email"]').type('validname@example.com');        
-        cy.get('button[data-qa="signup-button"]').click();
+        fillSignupForm('validname', 'validname@example.com')
 
         // cy.get('#id_gender1').check()
         cy.get('input[data-qa="password"]').type('password123')
@@ -63,12 +57,9 @@ describe('User Registration', () => {
     });
 
     it('should register a new user with case-insensitive data', () => {
-        cy.visit(Url)
+        navigateToLogin();
 
-        cy.get('a[href="/login"]').click()
-        cy.get('input[data-qa="signup-name"]').type('VALIDNAME');
-        cy.get('input[data-qa="signup-email"]').type('VALID.NAME@example.com');        
-        cy.get('button[data-qa="signup-button"]').click();
+        fillSignupForm('VALIDNAME', 'VALID.NAME@example.com')
 
         cy.get('#id_gender1').check()
         cy.get('input[data-qa="password"]').type('password123')
@@ -93,12 +84,9 @@ describe('User Registration', () => {
     });
 
     it('should show error for already registered email', () => {
-        cy.visit(Url)
+        navigateToLogin();
 
-        cy.get('a[href="/login"]').click()
-        cy.get('input[data-qa="signup-name"]').type('validname');
-        cy.get('input[data-qa="signup-email"]').type('validname@example.com');        
-        cy.get('button[data-qa="signup-button"]').click();
+        fillSignupForm('validname', 'validname@example.com')
 
         cy.get('#id_gender1').check()
         cy.get('input[data-qa="password"]').type('password123')
@@ -128,15 +116,9 @@ describe('User Registration', () => {
 
     // Negative Test Case
     it('should not be allowed to register new user as validation fails', () => {
-        cy.visit(Url)
+        navigateToLogin();
 
-        cy.get('a[href="/login"]').click()
-
-        cy.get('input[data-qa="signup-name"]').type('invalidname');
-        cy.get('input[data-qa="signup-email"]').type('invaliduser4-example.com');
-
-        
-        cy.get('button[data-qa="signup-button"]').click();
+        fillSignupForm('invalidname', 'invaliduser4-example.com')
 
         cy.get('input[data-qa="signup-email"]').then(($input) => {
             expect($input[0].checkValidity()).to.be.false;   
