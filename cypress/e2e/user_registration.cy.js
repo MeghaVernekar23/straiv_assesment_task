@@ -1,6 +1,6 @@
 import { deleteUserAccount, fillSignUpForm, navigateToLogin, registerUser, logoutUser } from "../support/userRegHelpers";
 import { userName, userEmail, loginUrl, userPassword } from "../support/commonHelpers";
-import { logUserIn } from "../support/userLoginHelpers";
+import { logInUser } from "../support/userLoginHelpers";
 
 
 describe('User Registration', () => {
@@ -30,7 +30,7 @@ describe('User Registration', () => {
         logoutUser();
         fillSignUpForm(userName, userEmail)
         cy.get('.signup-form').should('contain.text', 'Email Address already exist!');
-        logUserIn(userEmail, userPassword, loginUrl);
+        logInUser(userEmail, userPassword, loginUrl);
         deleteUserAccount();
         
     })
