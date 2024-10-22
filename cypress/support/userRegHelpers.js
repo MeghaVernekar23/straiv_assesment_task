@@ -34,6 +34,9 @@ export const navigateToLogin = () => {
     /** Navigates to the signup/login page */
     cy.visit(Url);
     cy.get('a[href="/login"]').click();
+    cy.get('button[data-qa="login-button"]').should('be.visible');
+    cy.get('button[data-qa="signup-button"]').should('be.visible');
+
 };
 
 export const registerUser = (userName, userEmail, include_optional_fields=true) => {

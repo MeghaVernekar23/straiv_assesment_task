@@ -26,7 +26,7 @@
 
 import { navigateToLogin } from "../support/userRegHelpers"; 
 
-Cypress.Commands.add('login', () => { 
+Cypress.Commands.add('navigatelogin', () => { 
     navigateToLogin();
 })
 
