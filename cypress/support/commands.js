@@ -26,8 +26,13 @@
 
 import { navigateToLogin } from "../support/userRegHelpers"; 
 
-Cypress.Commands.add('login', (originalFn, url, options) => { 
+Cypress.Commands.add('login', () => { 
     navigateToLogin();
+})
+
+Cypress.Commands.add('logout', () => { 
+    /** Logs out the user */
+    cy.get('a[href="/logout"]').click();
 })
 
 Cypress.Commands.add('deleteUserAccount', () => {

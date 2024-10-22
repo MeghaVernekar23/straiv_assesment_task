@@ -1,4 +1,4 @@
-import { deleteUserAccount, fillSignUpForm, navigateToLogin, registerUser, logoutUser } from "../support/userRegHelpers";
+import { fillSignUpForm, registerUser, logoutUser } from "../support/userRegHelpers";
 import { userName, userEmail, loginUrl, userPassword } from "../support/commonHelpers";
 import { logInUser } from "../support/userLoginHelpers";
 
@@ -8,6 +8,7 @@ describe('User Registration', () => {
     // Positive Test Case
     it('should register a new user with valid signup form data', () => {
         cy.login();
+        cy.wait(1000);
         registerUser(userName, userEmail)
         cy.deleteUserAccount();
     })
@@ -27,7 +28,7 @@ describe('User Registration', () => {
     it('should show error for already registered email', () => {
         cy.login();
         registerUser(userName, userEmail);
-        logoutUser();
+        cy.logout();
         fillSignUpForm(userName, userEmail)
         cy.get('.signup-form').should('contain.text', 'Email Address already exist!');
         logInUser(userEmail, userPassword, loginUrl);
