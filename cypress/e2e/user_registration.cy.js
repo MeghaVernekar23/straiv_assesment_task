@@ -1,9 +1,9 @@
-const url = 'https://www.automationexercise.com';
+import { deleteUserAccount, Url } from "../support/userRegHelpers";
 
 describe('User Registration', () => {
     // Positive Test Case
     it('should register a new user with valid signup form data', () => {
-        cy.visit(url)
+        cy.visit(Url)
 
         cy.get('a[href="/login"]').click()
         cy.get('input[data-qa="signup-name"]').type('validname');
@@ -28,12 +28,12 @@ describe('User Registration', () => {
         cy.get('button[data-qa="create-account"]').click()
         cy.contains('Account Created!').should('be.visible')
         cy.get('a[data-qa="continue-button"]').click();
-        cy.get('a[href="/delete_account"]').click()
-        cy.get('a[data-qa="continue-button"]').click();
+        
+        deleteUserAccount();
     })
 
     it('should register a new user with optional fields not filled', () => {
-        cy.visit(url)
+        cy.visit(Url)
 
         cy.get('a[href="/login"]').click()
         cy.get('input[data-qa="signup-name"]').type('validname');
@@ -58,12 +58,12 @@ describe('User Registration', () => {
         cy.get('button[data-qa="create-account"]').click()
         cy.contains('Account Created!').should('be.visible')
         cy.get('a[data-qa="continue-button"]').click();
-        cy.get('a[href="/delete_account"]').click()
-        cy.get('a[data-qa="continue-button"]').click();
+        
+        deleteUserAccount();
     });
 
     it('should register a new user with case-insensitive data', () => {
-        cy.visit(url)
+        cy.visit(Url)
 
         cy.get('a[href="/login"]').click()
         cy.get('input[data-qa="signup-name"]').type('VALIDNAME');
@@ -88,12 +88,12 @@ describe('User Registration', () => {
         cy.get('button[data-qa="create-account"]').click()
         cy.contains('Account Created!').should('be.visible')
         cy.get('a[data-qa="continue-button"]').click();
-        cy.get('a[href="/delete_account"]').click()
-        cy.get('a[data-qa="continue-button"]').click();
+        
+        deleteUserAccount();
     });
 
     it('should show error for already registered email', () => {
-        cy.visit(url)
+        cy.visit(Url)
 
         cy.get('a[href="/login"]').click()
         cy.get('input[data-qa="signup-name"]').type('validname');
@@ -128,7 +128,7 @@ describe('User Registration', () => {
 
     // Negative Test Case
     it('should not be allowed to register new user as validation fails', () => {
-        cy.visit(url)
+        cy.visit(Url)
 
         cy.get('a[href="/login"]').click()
 
