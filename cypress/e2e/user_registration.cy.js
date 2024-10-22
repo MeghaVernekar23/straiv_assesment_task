@@ -7,25 +7,25 @@ describe('User Registration', () => {
 
     // Positive Test Case
     it('should register a new user with valid signup form data', () => {
-        navigateToLogin();
+        cy.login();
         registerUser(userName, userEmail)
         deleteUserAccount();
     })
 
     it('should register a new user with optional fields not filled', () => {
-        navigateToLogin();
+        cy.login();
         registerUser(userName, userEmail, false)
         deleteUserAccount();
     });
 
     it('should register a new user with case-insensitive data', () => {
-        navigateToLogin();
+        cy.login();
         registerUser('VALIDNAME', 'VALID.NAME@example.com', true) 
         deleteUserAccount();
     });
 
     it('should show error for already registered email', () => {
-        navigateToLogin();
+        cy.login();
         registerUser(userName, userEmail);
         logoutUser();
         fillSignUpForm(userName, userEmail)
@@ -37,7 +37,7 @@ describe('User Registration', () => {
 
     // Negative Test Case
     it('should not be allowed to register new user as validation fails', () => {
-        navigateToLogin();
+        cy.login();
         fillSignUpForm('invalidname', 'invaliduser4-example.com')
         cy.get('input[data-qa="signup-email"]').then(($input) => {
             expect($input[0].checkValidity()).to.be.false;   
@@ -46,7 +46,7 @@ describe('User Registration', () => {
     });
     
     it('should not be allowed to register new user as there is missing data in mandatory fields', () => {
-        navigateToLogin();
+        cy.login();
         fillSignUpForm(userName, userEmail);
         cy.get('button[data-qa="create-account"]').click();
         cy.get('input[data-qa="password"]').then(($input) => {
