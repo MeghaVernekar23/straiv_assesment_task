@@ -9,19 +9,19 @@ describe('User Registration', () => {
     it('should register a new user with valid signup form data', () => {
         cy.login();
         registerUser(userName, userEmail)
-        deleteUserAccount();
+        cy.deleteUserAccount();
     })
 
     it('should register a new user with optional fields not filled', () => {
         cy.login();
         registerUser(userName, userEmail, false)
-        deleteUserAccount();
+        cy.deleteUserAccount();
     });
 
     it('should register a new user with case-insensitive data', () => {
         cy.login();
         registerUser('VALIDNAME', 'VALID.NAME@example.com', true) 
-        deleteUserAccount();
+        cy.deleteUserAccount();
     });
 
     it('should show error for already registered email', () => {
@@ -31,7 +31,7 @@ describe('User Registration', () => {
         fillSignUpForm(userName, userEmail)
         cy.get('.signup-form').should('contain.text', 'Email Address already exist!');
         logInUser(userEmail, userPassword, loginUrl);
-        deleteUserAccount();
+        cy.deleteUserAccount();
         
     })
 
