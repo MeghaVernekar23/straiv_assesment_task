@@ -43,12 +43,12 @@ export const navigateToLogin = () => {
     cy.get('a[href="/login"]').click();
 };
 
-export const registerUser = (username, useremail, include_optional_fields=true) => {
+export const registerUser = (include_optional_fields=true, username="testuser12", useremail="testuser12@example.com") => {
     /** Creates a new account for a unique user */
 
     // const randomName = generateRandomString(8);
     // const randomEmail = generateRandomEmail();
-    const randomPassword = generateRandomString(12);
+    // const randomPassword = generateRandomString(12);
     const randomMobile = generateRandomNumber(10);
     const randomDate = generateRandomDate();
 
@@ -60,7 +60,7 @@ export const registerUser = (username, useremail, include_optional_fields=true) 
         cy.get('#id_gender1').check();
         cy.get('input[data-qa="company"]').type('Test Company');
     }
-    cy.get('input[data-qa="password"]').type(randomPassword);
+    cy.get('input[data-qa="password"]').type("password123");
     cy.get('select[data-qa="days"]').select(randomDate.day.toString());
     cy.get('select[data-qa="months"]').select(randomDate.month.toString());
     cy.get('select[data-qa="years"]').select(randomDate.year.toString());
@@ -79,7 +79,7 @@ export const registerUser = (username, useremail, include_optional_fields=true) 
     cy.get('a[data-qa="continue-button"]').click();
 };
 
-export const fillSignUpForm = (username, useremail) => {
+export const fillSignUpForm = (username="testuser", useremail="testuser12113@example.com") => {
     /** Fills the signup form before the user account form is created */
 
     cy.get('input[data-qa="signup-name"]').type(username);
@@ -89,6 +89,6 @@ export const fillSignUpForm = (username, useremail) => {
 
 export const logoutUser = () => {
     /** Logs out the user */
-    
+
     cy.get('a[href="/logout"]').click();
 }
