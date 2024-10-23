@@ -52,4 +52,15 @@ describe('User Registration with negative scenarios', () => {
             expect($input[0].validationMessage).to.eq('Fülle dieses Feld aus.');
         });
     });
+
+    it.only('should not be allowed to register new user as there is missing firstname mandatory field', () => {
+        fillSignUpForm(userName, userEmail);
+        cy.get('button[data-qa="create-account"]').click();
+        cy.get('input[data-qa="password"]').type("password123");
+        cy.get('input[data-qa="first_name"]').then(($input) => {
+            expect($input[0].checkValidity()).to.be.false;   
+            expect($input[0].validationMessage).to.eq('Fülle dieses Feld aus.');
+        });
+    });
+
 });
