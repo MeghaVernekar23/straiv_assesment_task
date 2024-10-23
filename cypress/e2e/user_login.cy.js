@@ -10,11 +10,14 @@ describe('User Login with Positive Scenarios', () => {
     cy.navigatelogin();
   });
 
-  it('Should be able to allow login with proper credentials', () => {
+  it.only('Should be able to allow login with proper credentials', () => {
     cy.navigatelogin();
     registerUser(userName, userEmail);
     cy.logout();
     logInUser(userEmail, userPassword, loginUrl);
+    cy.wait(1000);
+    cy.get('a[href="/logout"]').should('be.visible');
+    cy.get('a[href="/delete_account"]').should('be.visible');
     cy.deleteUserAccount();
   });
 
@@ -29,7 +32,7 @@ describe('User Login with Positive Scenarios', () => {
 
 describe('User Login with Negative Scenarios', () => {
 
-  it.only('should prevent SQL injection in login form', () => {
+  it('should prevent SQL injection in login form', () => {
     logInUser("OR **--", 'password', loginUrl);
     cy.get('input[data-qa="login-email"]').then(($input) => {
         expect($input[0].checkValidity()).to.be.false;   
