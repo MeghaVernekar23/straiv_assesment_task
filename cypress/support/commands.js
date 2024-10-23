@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import { navigateToLogin } from "../support/userRegHelpers"; 
+import { navigateToLogin } from "./userRegistrationHelpers"; 
 
 Cypress.Commands.add('navigatelogin', () => { 
     navigateToLogin();
