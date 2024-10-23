@@ -1,5 +1,5 @@
 import { registerUser } from "../support/userRegistrationHelpers";
-import { userName, userEmail, userPassword } from "../support/commonHelpers";
+import { user } from "../support/commonHelpers";
 import { logInUser } from "../support/userLoginHelpers";
 
 beforeEach(() => {
@@ -14,12 +14,12 @@ describe('User Login with Positive Scenarios', () => {
   });
 
   it('Should be able to allow login with proper credentials', () => {
-    registerUser(userName, userEmail);
+    registerUser(user.name, user.email);
     cy.logout();
     cy.navigatelogin();
-    logInUser(userEmail, userPassword);
+    logInUser(user.email, user.password);
     cy.wait(1000);
-    cy.contains(`Logged in as ${userName}`).should('be.visible');
+    cy.contains(`Logged in as ${user.name}`).should('be.visible');
     cy.get('a[href="/logout"]').should('be.visible');
     cy.get('a[href="/delete_account"]').should('be.visible');
     cy.deleteUserAccount();
@@ -44,7 +44,7 @@ describe('User Login with Negative Scenarios', () => {
   });
   
   it('should display an error for missing password field', () => {
-    cy.get('input[data-qa="login-email"]').type(userEmail);
+    cy.get('input[data-qa="login-email"]').type(user.email);
     cy.get('button[data-qa="login-button"]').click();
     cy.get('input[data-qa="login-password"]').then(($input) => {
       expect($input[0].checkValidity()).to.be.false;   
@@ -53,7 +53,7 @@ describe('User Login with Negative Scenarios', () => {
   });
   
   it('should display an error for missing email field', () => {
-    cy.get('input[data-qa="login-password"]').type(userPassword);
+    cy.get('input[data-qa="login-password"]').type(user.password);
     cy.get('button[data-qa="login-button"]').click();
     cy.get('input[data-qa="login-email"]').then(($input) => {
       expect($input[0].checkValidity()).to.be.false;   

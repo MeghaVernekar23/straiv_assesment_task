@@ -1,3 +1,5 @@
+import { baseUrl } from "./commonHelpers";
+
 const generateRandomNumber = (length) => {
     let result = '';
     const characters = '0123456789';
@@ -14,11 +16,9 @@ const generateRandomDate = () => {
     return { day, month, year };
 };
 
-export const Url = 'https://www.automationexercise.com';
-
 export const navigateToLogin = () => {
     /** Navigates to the signup/login page */
-    cy.visit(Url);
+    cy.visit(baseUrl);
     cy.get('a[href="/login"]').click();
     cy.get('button[data-qa="login-button"]').should('be.visible');
     cy.get('button[data-qa="signup-button"]').should('be.visible');

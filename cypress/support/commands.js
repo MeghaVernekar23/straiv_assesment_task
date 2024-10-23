@@ -39,5 +39,7 @@ Cypress.Commands.add('deleteUserAccount', () => {
     /** Deletes user account */ 
     cy.get('a[href="/delete_account"]').click();
     cy.get('a[data-qa="continue-button"]').click();
+    cy.wait(1000);
+    
 })
 
