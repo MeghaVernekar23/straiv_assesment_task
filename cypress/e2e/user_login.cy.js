@@ -20,22 +20,17 @@ describe('User Login with Positive Scenarios', () => {
 
   it('should display an error for invalid credentials', () => {
 
-      cy.navigatelogin();
-      cy.get('input[data-qa="login-email"]').type('invaliduser@example.com');
-      cy.get('input[data-qa="login-password"]').type('invalidpassword');
-      cy.get('button[data-qa="login-button"]').click();
-      cy.get('.login-form').should('contain.text', 'Your email or password is incorrect!');
+    logInUser('invaliduser@example.com', 'invalidpassword', loginUrl);
+    cy.get('.login-form').should('contain.text', 'Your email or password is incorrect!');
+
   });
 
 });
 
 describe('User Login with Negative Scenarios', () => {
 
-  it('should prevent SQL injection in login form', () => {
-    cy.visit(loginUrl);
-    cy.get('input[data-qa="login-email"]').type("OR **--");
-    cy.get('input[data-qa="login-password"]').type('password');
-    cy.get('button[data-qa="login-button"]').click();
+  it.only('should prevent SQL injection in login form', () => {
+    logInUser("OR **--", 'password', loginUrl);
     cy.get('input[data-qa="login-email"]').then(($input) => {
         expect($input[0].checkValidity()).to.be.false;   
         expect($input[0].validationMessage).to.eq('Die E-Mail-Adresse muss ein @-Zeichen enthalten. In der Angabe "OR**--" fehlt ein @-Zeichen.');
