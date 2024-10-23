@@ -2,6 +2,11 @@ import { registerUser } from "../support/userRegHelpers";
 import { userName, userEmail, loginUrl, userPassword } from "../support/commonHelpers";
 import { logInUser } from "../support/userLoginHelpers";
 
+beforeEach(() => {
+  cy.navigatelogin();
+});
+
+
 describe('User Login with Positive Scenarios', () => {
 
   // Positive test case
@@ -11,9 +16,9 @@ describe('User Login with Positive Scenarios', () => {
   });
 
   it('Should be able to allow login with proper credentials', () => {
-    cy.navigatelogin();
     registerUser(userName, userEmail);
     cy.logout();
+    cy.navigatelogin();
     logInUser(userEmail, userPassword, loginUrl);
     cy.wait(1000);
     cy.contains(`Logged in as ${userName}`).should('be.visible');
@@ -23,7 +28,6 @@ describe('User Login with Positive Scenarios', () => {
   });
 
   it('should display an error for invalid credentials', () => {
-
     logInUser('invaliduser@example.com', 'invalidpassword', loginUrl);
     cy.get('.login-form').should('contain.text', 'Your email or password is incorrect!');
 
