@@ -44,4 +44,30 @@ describe('User Login with Negative Scenarios', () => {
         expect($input[0].validationMessage).to.eq('Die E-Mail-Adresse muss ein @-Zeichen enthalten. In der Angabe "OR**--" fehlt ein @-Zeichen.');
     });
   });
+  
+  it('should prevent SQL injection in login form', () => {
+    logInUser("OR **--", 'password', loginUrl);
+    cy.get('input[data-qa="login-email"]').then(($input) => {
+        expect($input[0].checkValidity()).to.be.false;   
+        expect($input[0].validationMessage).to.eq('Die E-Mail-Adresse muss ein @-Zeichen enthalten. In der Angabe "OR**--" fehlt ein @-Zeichen.');
+    });
+  });
+  
+  it('should display an error for missing password field', () => {
+    cy.get('input[data-qa="login-email"]').type(userEmail);
+    cy.get('button[data-qa="login-button"]').click();
+    cy.get('input[data-qa="login-password"]').then(($input) => {
+      expect($input[0].checkValidity()).to.be.false;   
+      expect($input[0].validationMessage).to.eq('Fülle dieses Feld aus.');
+    });
+  });
+  
+  it.only('should display an error for missing password field', () => {
+    cy.get('input[data-qa="login-password"]').type(userPassword);
+    cy.get('button[data-qa="login-button"]').click();
+    cy.get('input[data-qa="login-email"]').then(($input) => {
+      expect($input[0].checkValidity()).to.be.false;   
+      expect($input[0].validationMessage).to.eq('Fülle dieses Feld aus.');
+    });
+  });
 });
