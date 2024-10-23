@@ -18,16 +18,12 @@ describe('User Login', () => {
 
   
   it('Should be able to see the login form', () => {
-      cy.visit(loginUrl);
-    
-      cy.url().should('include', '/login');
-      cy.get('h2').contains('Login to your account').should('be.visible');
-
+    cy.navigatelogin();
   });
 
   it('should display an error for invalid credentials', () => {
 
-      cy.visit(loginUrl);
+      cy.navigatelogin();
 
       cy.get('input[data-qa="login-email"]').type('invaliduser@example.com');
       cy.get('input[data-qa="login-password"]').type('invalidpassword');
