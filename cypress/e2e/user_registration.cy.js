@@ -2,16 +2,13 @@ import { fillSignUpForm, registerUser } from "../support/userRegHelpers";
 import { userName, userEmail, loginUrl, userPassword } from "../support/commonHelpers";
 import { logInUser } from "../support/userLoginHelpers";
 
+beforeEach(() => {
+    cy.navigatelogin();
+});
 
-describe('User Registration', () => {
+describe('User Registration with positive scenarios', () => {
 
-    beforeEach(() => {
-        cy.navigatelogin();
-    });
-
-    // Positive Test Case
     it('should register a new user with valid signup form data', () => {
-        
         cy.wait(1000);
         registerUser(userName, userEmail)
         cy.deleteUserAccount();
@@ -33,11 +30,12 @@ describe('User Registration', () => {
         fillSignUpForm(userName, userEmail)
         cy.get('.signup-form').should('contain.text', 'Email Address already exist!');
         logInUser(userEmail, userPassword, loginUrl);
-        cy.deleteUserAccount();
-        
+        cy.deleteUserAccount();  
     })
+});
 
-    // Negative Test Case
+describe('User Registration with negative scenarios', () => {
+
     it('should not be allowed to register new user as validation fails', () => {
         fillSignUpForm('invalidname', 'invaliduser4-example.com')
         cy.get('input[data-qa="signup-email"]').then(($input) => {
@@ -54,4 +52,4 @@ describe('User Registration', () => {
             expect($input[0].validationMessage).to.eq('Fülle dieses Feld aus.');
         });
     });
-})
+});
