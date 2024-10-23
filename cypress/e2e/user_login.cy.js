@@ -10,12 +10,13 @@ describe('User Login with Positive Scenarios', () => {
     cy.navigatelogin();
   });
 
-  it.only('Should be able to allow login with proper credentials', () => {
+  it('Should be able to allow login with proper credentials', () => {
     cy.navigatelogin();
     registerUser(userName, userEmail);
     cy.logout();
     logInUser(userEmail, userPassword, loginUrl);
     cy.wait(1000);
+    cy.contains(`Logged in as ${userName}`).should('be.visible');
     cy.get('a[href="/logout"]').should('be.visible');
     cy.get('a[href="/delete_account"]').should('be.visible');
     cy.deleteUserAccount();
