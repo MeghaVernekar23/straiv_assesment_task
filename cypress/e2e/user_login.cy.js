@@ -9,8 +9,6 @@ beforeEach(() => {
 
 describe('User Login with Positive Scenarios', () => {
 
-  // Positive test case
-
   it('Should be able to see the login form', () => {
     cy.navigatelogin();
   });
