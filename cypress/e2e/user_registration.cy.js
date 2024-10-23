@@ -54,7 +54,7 @@ describe('User Registration with negative scenarios', () => {
         });
     });
 
-    it.only('should not be allowed to register new user as there is missing firstname mandatory field', () => {
+    it('should not be allowed to register new user as there is missing firstname mandatory field', () => {
         fillSignUpForm(user.name, user.email);
         cy.get('button[data-qa="create-account"]').click();
         cy.get('input[data-qa="password"]').type("password123");
