@@ -2,7 +2,7 @@ import { registerUser } from "../support/userRegHelpers";
 import { userName, userEmail, loginUrl, userPassword } from "../support/commonHelpers";
 import { logInUser } from "../support/userLoginHelpers";
 
-describe('User Login', () => {
+describe('User Login with Positive Scenarios', () => {
 
   // Positive test case
   it('Should be able to allow login with proper credentials', () => {
@@ -28,7 +28,7 @@ describe('User Login', () => {
   });
 });
 
-describe('SQL Injection Test', () => {
+describe('User Login with Negative Scenarios', () => {
   it('should prevent SQL injection in login form', () => {
 
     cy.visit(loginUrl);
