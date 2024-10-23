@@ -1,6 +1,21 @@
-const loginUrl = 'https://www.automationexercise.com/login';
+import { registerUser } from "../support/userRegHelpers";
+import { userName, userEmail, loginUrl, userPassword } from "../support/commonHelpers";
+import { logInUser } from "../support/userLoginHelpers";
 
-describe('Automating User Login', () => {
+// const loginUrl = 'https://www.automationexercise.com/login';
+
+describe('User Login', () => {
+
+  // Positive test case
+  it('Should be able to allow login with proper credentials', () => {
+    cy.navigatelogin();
+    registerUser(userName, userEmail);
+    cy.logout();
+    logInUser(userEmail, userPassword, loginUrl);
+    cy.deleteUserAccount();;
+
+});
+
   
   it('Should be able to see the login form', () => {
       cy.visit(loginUrl);

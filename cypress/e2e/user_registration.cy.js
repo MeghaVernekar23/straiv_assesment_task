@@ -1,4 +1,4 @@
-import { fillSignUpForm, registerUser, logoutUser } from "../support/userRegHelpers";
+import { fillSignUpForm, registerUser } from "../support/userRegHelpers";
 import { userName, userEmail, loginUrl, userPassword } from "../support/commonHelpers";
 import { logInUser } from "../support/userLoginHelpers";
 
