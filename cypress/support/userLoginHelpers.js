@@ -1,6 +1,6 @@
 
 
-export const logInUser = (username, password, loginUrl) => {
+export const logInUser = (username, password) => {
 
     cy.get('input[data-qa="login-email"]').type(username);
     cy.get('input[data-qa="login-password"]').type(password);

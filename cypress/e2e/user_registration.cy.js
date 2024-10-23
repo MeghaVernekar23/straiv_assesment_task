@@ -1,5 +1,5 @@
 import { fillSignUpForm, registerUser } from "../support/userRegHelpers";
-import { userName, userEmail, loginUrl, userPassword } from "../support/commonHelpers";
+import { userName, userEmail, userPassword } from "../support/commonHelpers";
 import { logInUser } from "../support/userLoginHelpers";
 
 beforeEach(() => {
@@ -29,7 +29,8 @@ describe('User Registration with positive scenarios', () => {
         cy.logout();
         fillSignUpForm(userName, userEmail)
         cy.get('.signup-form').should('contain.text', 'Email Address already exist!');
-        logInUser(userEmail, userPassword, loginUrl);
+        cy.navigatelogin();
+        logInUser(userEmail, userPassword);
         cy.deleteUserAccount();  
     })
 });
@@ -53,7 +54,7 @@ describe('User Registration with negative scenarios', () => {
         });
     });
 
-    it.only('should not be allowed to register new user as there is missing firstname mandatory field', () => {
+    it('should not be allowed to register new user as there is missing firstname mandatory field', () => {
         fillSignUpForm(userName, userEmail);
         cy.get('button[data-qa="create-account"]').click();
         cy.get('input[data-qa="password"]').type("password123");

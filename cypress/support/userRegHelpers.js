@@ -1,17 +1,3 @@
-const generateRandomString = (length) => {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
-};
-
-const generateRandomEmail = () => {
-    const randomString = generateRandomString(10);
-    return `${randomString}@example.com`;
-};
-
 const generateRandomNumber = (length) => {
     let result = '';
     const characters = '0123456789';
@@ -42,9 +28,6 @@ export const navigateToLogin = () => {
 export const registerUser = (userName, userEmail, include_optional_fields=true) => {
     /** Creates a new account for a unique user */
 
-    // const randomName = generateRandomString(8);
-    // const randomEmail = generateRandomEmail();
-    // const randomPassword = generateRandomString(12);
     const randomMobile = generateRandomNumber(10);
     const randomDate = generateRandomDate();
 
@@ -77,8 +60,10 @@ export const registerUser = (userName, userEmail, include_optional_fields=true) 
     cy.get('input[data-qa="mobile_number"]').type(randomMobile);
 
     cy.get('button[data-qa="create-account"]').click();
+    cy.wait(1000);
     cy.contains('Account Created!').should('be.visible');
     cy.get('a[data-qa="continue-button"]').click();
+    cy.wait(1000);
     cy.contains(`Logged in as ${userName}`).should('be.visible');
 };
 
