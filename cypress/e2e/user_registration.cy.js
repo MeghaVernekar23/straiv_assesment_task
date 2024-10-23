@@ -6,7 +6,7 @@ import { logInUser } from "../support/userLoginHelpers";
 describe('User Registration', () => {
 
     // Positive Test Case
-    it('should register a new user with valid signup form data', () => {
+    it.only('should register a new user with valid signup form data', () => {
         cy.navigatelogin();
         cy.wait(1000);
         registerUser(userName, userEmail)
