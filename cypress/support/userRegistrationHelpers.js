@@ -1,6 +1,6 @@
-import { baseUrl } from "./commonHelpers";
-
 const generateRandomNumber = (length) => {
+    /** Generate a random number */
+    
     let result = '';
     const characters = '0123456789';
     for (let i = 0; i < length; i++) {
@@ -10,20 +10,12 @@ const generateRandomNumber = (length) => {
 };
 
 const generateRandomDate = () => {
+    /** Generate a raondom date */
+
     const day = Math.floor(Math.random() * 28) + 1; 
     const month = Math.floor(Math.random() * 12) + 1;
     const year = Math.floor(Math.random() * 30) + 1980;
     return { day, month, year };
-};
-
-export const navigateToLogin = () => {
-    /** Navigates to the signup/login page */
-    cy.visit(baseUrl);
-    cy.contains("AutomationExercise").should('be.visible');
-    cy.get('a[href="/login"]').click();
-    cy.get('button[data-qa="login-button"]').should('be.visible');
-    cy.get('button[data-qa="signup-button"]').should('be.visible');
-
 };
 
 export const registerUser = (userName, userEmail, include_optional_fields=true) => {
@@ -74,10 +66,4 @@ export const fillSignUpForm = (username, useremail) => {
     cy.get('input[data-qa="signup-name"]').type(username);
     cy.get('input[data-qa="signup-email"]').type(useremail); 
     cy.get('button[data-qa="signup-button"]').click();
-}
-
-export const logoutUser = () => {
-    /** Logs out the user */
-
-    cy.get('a[href="/logout"]').click();
 }
