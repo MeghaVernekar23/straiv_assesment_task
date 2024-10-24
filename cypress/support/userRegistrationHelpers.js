@@ -1,6 +1,6 @@
 import { generateRandomDate, generateRandomNumber} from './commonHelpers';
 
-export class UserRegistration {
+class UserRegistration {
 
     fillSignUpForm (username, useremail) {
         /** Fills the signup form before the user account form is created */
@@ -50,3 +50,5 @@ export class UserRegistration {
         cy.contains(`Logged in as ${userName}`).should('be.visible');
     };
 }
+
+export const userRegistration = new UserRegistration();

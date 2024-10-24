@@ -1,6 +1,6 @@
 export const baseUrl = 'https://www.automationexercise.com';
 
-export const user = {
+export const userDetails = {
     name: 'testusers',
     email: 'testusers1233@example.com',
     password: 'password123',
