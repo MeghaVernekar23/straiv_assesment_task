@@ -1,5 +1,7 @@
 export const baseUrl = 'https://www.automationexercise.com';
 
+export const productName = "Dress";
+
 export const userDetails = {
     name: 'testusers',
     email: 'testusers1233@example.com',
