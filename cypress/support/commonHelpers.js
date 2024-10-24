@@ -10,6 +10,7 @@ export const navigateToLogin = () => {
     /** Navigates to the signup/login page */
 
     cy.visit(baseUrl);
+    cy.wait(2000);
     cy.contains("AutomationExercise").should('be.visible');
     cy.get('a[href="/login"]').click();
     cy.get('button[data-qa="login-button"]').should('be.visible');
