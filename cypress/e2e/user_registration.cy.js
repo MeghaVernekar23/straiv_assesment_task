@@ -1,6 +1,6 @@
 import { fillSignUpForm, registerUser, UserRegistration } from "../support/userRegistrationHelpers";
 import { user } from "../support/commonHelpers";
-import { logInUser } from "../support/userLoginHelpers";
+import { loginUser } from "../support/userLoginHelpers";
 
 beforeEach(() => {
     cy.navigatelogin();
@@ -32,7 +32,7 @@ describe('User Registration with positive scenarios', () => {
         userRegistration.fillSignUpForm(user.name, user.email)
         cy.get('.signup-form').should('contain.text', 'Email Address already exist!');
         cy.navigatelogin();
-        logInUser(user.email, user.password);
+        loginUser(user.email, user.password);
         cy.deleteUserAccount();  
     })
 });
