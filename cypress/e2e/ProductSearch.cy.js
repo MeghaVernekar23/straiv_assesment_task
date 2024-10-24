@@ -1,4 +1,4 @@
-describe('Product Search on Automation Exercise', () => {
+describe('Product Search and manage ', () => {
 
     beforeEach(() => {
         cy.navigatelogin();
@@ -34,5 +34,6 @@ describe('Product Search on Automation Exercise', () => {
         cy.contains('button', 'Add to cart').click();
         cy.contains('Added!').should('be.visible');
         cy.contains('Your product has been added to cart.').should('be.visible');
+        cy.contains('button', 'Continue Shopping').click();
     });
 });
