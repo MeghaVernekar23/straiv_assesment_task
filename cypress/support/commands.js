@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import { navigateToLogin } from "../support/userRegHelpers"; 
+import { navigateToLogin } from "./commonHelpers"; 
 
 Cypress.Commands.add('navigatelogin', () => { 
     navigateToLogin();
@@ -38,6 +38,9 @@ Cypress.Commands.add('logout', () => {
 Cypress.Commands.add('deleteUserAccount', () => {
     /** Deletes user account */ 
     cy.get('a[href="/delete_account"]').click();
+    cy.wait(500);
     cy.get('a[data-qa="continue-button"]').click();
+    cy.wait(1000);
+
 })
 
