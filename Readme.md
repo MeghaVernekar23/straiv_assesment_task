@@ -34,7 +34,7 @@ STRAIV_ASSESMENT_TASK
 	|-- Bug Reports.docx					# Bug Report document
 	|-- TestCases.xlsx						# All relevant test cases document
 	|-- TestPlan.docx						# Test Plan with all details document
-	|-- Testing Document.docx				# Complete testing document
+	|-- Straiv Final Testing Document.docx				# Complete testing document
 
 |-- .gitignore				
 |-- automationframework.md		
