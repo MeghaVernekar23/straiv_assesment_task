@@ -4,6 +4,47 @@
 
 Stariv assessment task is a small task given to check the manual and automation skill ability of a QA engineer. This repository contains the automated tests for UserLogin and UserRegistration functionality for the website [Automation Exercise](https://www.automationexercise.com/) using **Cypress**.
 
+## Source Code Structure
+
+```
+STRAIV_ASSESMENT_TASK
+
+|-- cypress								
+
+	|-- downloads
+
+	|-- e2e
+		|-- checkoutProcess.cy.js			# Automation script main file for checkout-process module
+		|-- productSearch.cy.js				# Automation script main file for product-search module
+		|-- userLogin.cy.js					# Automation script main file for user-login module
+		|-- userRegistration.cy.js			# Automation script main file for user-registration module
+	
+  |-- fixtures
+	
+  |-- support
+		|-- checkoutHelpers.js				# Reusuable helper functions for the checkout-process module
+		|-- productSearchHelpers.js			# Reusuable helper functions for the product-search module
+		|-- userLoginHelpers.js				# Reusuable helper functions for the user-login module
+		|-- userRegistrationHelpers.js		# Reusuable helper functions for the user-registration module
+		|-- e2e.js							# Reusuable helper functions for the commands module
+		|-- command.js						# Custom command creation module 
+		|-- commonHelpers.js				# Reusuable and common helper functions which is used by the application
+
+|-- Documents
+	|-- Bug Reports.docx					# Bug Report document
+	|-- TestCases.xlsx						# All relevant test cases document
+	|-- TestPlan.docx						# Test Plan with all details document
+	|-- Testing Document.docx				# Complete testing document
+
+|-- .gitignore				
+|-- automationframework.md		
+|-- cypress.config.js						# Cypress configurations file
+|-- package.json							# Needed packages to run the application
+|-- package-lock.json							
+|-- Readme.md
+-	
+```
+
 ## Cypress vs Playwright
 
 There are couple of good automation framework which serve our purpose. But here for our example we have choosen cypress to perform our automation tasks. There are couple of reasons as to why cypress was choosen. Inorder to find out why cypress was choosen instead of other frameworks, one can please refer to [Cypress VS Playwright](./automationframework.md) documentation for more information.
